@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="book.js" defer></script>
+    <link rel="stylesheet" href="style.css">
     <title>Library</title>
 </head>
 <body>
-    
+    <p class="title">WELLCOME TO THE LIBRARY</p>
+    <div class="input-box">
+        <label for="book-title">Title:</label>
+        <input class="book-input" id="book-title" type="text" placeholder="Title">
+        <label for="book-author">Author:</label>
+        <input class="book-input" id="book-author" type="text" placeholder="Author">
+        <label for="book-page">Number of Page:</label>
+        <input class="book-input" id="book-page" type="text" placeholder="Page">
+        <label for="read-status">Do you read it before?</label>
+        <select name="read status" class="book-input" id="read-status">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <button class="book-add-button" type="button">ADD</button>
+    </div>
+    <div class="book-box">
+        
+    </div>
 </body>
 </html>
