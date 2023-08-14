@@ -36,10 +36,10 @@ function addBookToLibrary() {
 }
 
 function addButton(){
-  button = document.querySelector(".book-add-button");
-  button.addEventListener("click",addBookToLibrary);
+  addPopupButton();
   addBookButton();
 }
+
 
 function showBook(){
   bookShelf = document.querySelector(".book-box");
@@ -62,6 +62,24 @@ function showBook(){
     bookShelf.appendChild(child);
     index++;
   }
+}
+
+function addPopupButton(){
+  let popup = document.querySelector(".add-option");
+  let popupZone =document.querySelector("#add-popup");
+  popup.addEventListener("click",()=>{
+    popupZone.showModal();
+  })
+  popupZone.addEventListener("click",(e)=>{
+    const isAddButton = e.target.className ==="book-add-button";
+    const isExitButton = e.target.className ==="exit-popup"
+    if(isAddButton){
+      addBookToLibrary();
+      popupZone.close();
+    }else if(isExitButton){
+      popupZone.close();
+    }
+  })
 }
 
 function addBookButton(){
