@@ -38,37 +38,67 @@ function addBookToLibrary() {
 function addButton(){
   button = document.querySelector(".book-add-button");
   button.addEventListener("click",addBookToLibrary);
-  addRemoveButton();
+  addBookButton();
 }
 
 function showBook(){
   bookShelf = document.querySelector(".book-box");
   clearBook(bookShelf);
-  let index = 0;
+  let index = 0,readcheck;
   for(let book of myLibrary){
     let child = document.createElement("div");
     child.textContent = book.info();
     if(book.isRead == "true"){
       child.classList ="book readed";
+      readcheck = "Image/list-check.svg"
     }
     else if(book.isRead == "false"){
       child.classList ="book noread";
+      readcheck = "Image/list-cross.svg"
     }
-    child.innerHTML += '<button class ="remove-button" type="button" data-id ="'+ book.ID +'" >X</button>' 
+    child.innerHTML += '<button class ="remove-button" type="button" data-id ="'+ book.ID +'" >X</button>';
+    child.innerHTML += '<button class ="status-button" type="button" data-id ="'+ book.ID +
+    '" ><img src="'+ readcheck + '" alt="read"></button>';
     bookShelf.appendChild(child);
     index++;
   }
 }
 
-function addRemoveButton(){
+function addBookButton(){
   buttonZone = document.querySelector(".book-box")
   buttonZone.addEventListener("click",(e)=>{
-    const isButton = e.target.nodeName === "BUTTON";
-    if(!isButton){
+    const isButton = e.target.className === "remove-button" ;
+    const isCheckList = e.target.nodeName ==="IMG";
+    if(isButton){
+      remove(e.target.dataset.id);
+    }
+    else if(isCheckList){
+      let checkButton = e.target.parentNode;
+      if(checkButton.parentNode.className == "book readed"){
+        checkButton.innerHTML = `<img src="Image/list-cross.svg" alt="read"></img>`;
+        swichState(checkButton.dataset.id);
+      }else if(checkButton.parentNode.className == "book noread"){
+        checkButton.innerHTML = `<img src="Image/list-check.svg" alt="read"></img>`;
+        swichState(checkButton.dataset.id);
+      }
+    }
+  })
+}
+
+function swichState(number){
+  let index = 0;
+  for(let book of myLibrary){
+    if(book.ID == number){
+      if(book.isRead == "true"){
+        book.isRead = "false"
+      }else if(book.isRead == "false"){
+        book.isRead = "true"
+      }
+      showBook();
       return;
     }
-    remove(e.target.dataset.id);
-  })
+    index++
+  }
 }
 
 function remove(number){
@@ -91,7 +121,7 @@ function clearBook(location){
   });
 }
 
-function generateBookId(option,num){
+function generateBookId(option){
   if(option =="generate"){
     for(let i = 0; i < bookIdPool.size;i++){
     bookIdPool.idPool.push(i);

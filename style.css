@@ -37,7 +37,7 @@ input{
 .noread{
     background-color: rgba(255, 0, 0, 0.5);
 }
-.remove-button{
+.remove-button,.status-button {
     position: absolute;
     border: none;
     opacity: 0.6;
@@ -47,4 +47,19 @@ input{
     top: 0px;
     right: 0px;
     font-weight: bolder;
+}
+.status-button{
+    position: absolute;
+    border: none;
+    padding: 0;
+    border-radius: 0 0 10px 0;
+    height: 20px;
+    width: 20px;
+    font-weight: bolder;
+    top: 0px;
+    right: 92px;
+}
+.status-button > img{
+    height: 20px;
+    width: 20px;
 }
